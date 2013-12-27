@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 public class CountOfPowerPairs 
 {
+	// binary search which actually finds the upper bound of the array 
 	public int binarySearch(int[] searchArray,int start, int end,int searchElement)
 	{
 		int breaker;
@@ -32,8 +33,11 @@ public class CountOfPowerPairs
 		return pos;
 
 	}
+
+	// counts the pair of powerpairs 
 	public int getCountPowerpairs(int[] array1,int[] array2)
 	{
+		// sorting and creating a hashmap to keep the track of count of no of 0,1,2,4 which would be used for the count  calculations
 		Arrays.sort(array2);
 		HashMap<Integer,Integer> arraymap= new HashMap<>();	
 		for (int i=0;i<array2.length;i++)
