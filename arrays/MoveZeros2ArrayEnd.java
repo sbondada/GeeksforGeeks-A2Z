@@ -27,9 +27,12 @@ public class MoveZeros2ArrayEnd
 			}
 //			int temp;
 //			temp=array1[arraypos.get(inc)];
-			array1[arraypos.get(inc)]=array1[lastNonZeroPos];
-			array1[lastNonZeroPos]=0;
-			inc+=1;
+			if(arraypos.get(inc)<lastNonZeroPos)
+			{
+                array1[arraypos.get(inc)]=array1[lastNonZeroPos];
+                array1[lastNonZeroPos]=0;
+			}
+                inc+=1;
 		}
 		return array1;
 	}
