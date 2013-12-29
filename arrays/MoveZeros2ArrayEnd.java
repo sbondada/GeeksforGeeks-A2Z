@@ -1,49 +1,66 @@
 package arrays;
 
-import java.util.ArrayList;
-import java.util.Map.Entry;
-
 public class MoveZeros2ArrayEnd 
 {
 	public int[] move2End(int[] array1)
 	{
-        ArrayList<Integer> arraypos= new ArrayList<>();
-        int i=0;
-		while(i<array1.length)
+		int inc=0;	
+		int incz,incnz;
+		int zeroCount=0;
+		// looping the whole list
+		while(inc<array1.length)
 		{
-			if (array1[i]==0)
+//			System.out.println("loop entry "+zeroCount);
+			//finding the first zero value
+			if (array1[inc]==0)
 			{
-				arraypos.add(i);
+				incz=inc;
+				zeroCount+=1;
+				incnz=inc+1;
+				//searching for the first non zero value
+				while(incnz<array1.length)
+				{
+					//shifting the values from non zero position to zero position until reach the zero position
+					if(array1[incnz]!=0)
+					{
+						array1[incz-(zeroCount-1)]=array1[incnz];
+						//incz-(zeroCount-1) this over covers the zero positions so that after replacing no extra 0 is in between
+						incnz+=1;
+						incz+=1;
+						inc=incnz;
+					}
+					else
+					{
+						System.out.println("inc value "+inc);
+						break;
+					}
+				}
 			}
-			i=i+1;
+			else
+			{
+				inc+=1;
+			}
 		}
-		int inc=0;
-		int lastNonZeroPos=array1.length-1;
-		while(inc<arraypos.size())
+		//adding the zeros to the last of the array
+		for (int i=1;i<=zeroCount;i++)
 		{
-			while (array1[lastNonZeroPos]==0)
-			{
-				lastNonZeroPos-=1;
-			}
-//			int temp;
-//			temp=array1[arraypos.get(inc)];
-			if(arraypos.get(inc)<lastNonZeroPos)
-			{
-                array1[arraypos.get(inc)]=array1[lastNonZeroPos];
-                array1[lastNonZeroPos]=0;
-			}
-                inc+=1;
+			array1[array1.length-i]=0;
 		}
 		return array1;
 	}
 	public static void main(String args[])
 	{
 		MoveZeros2ArrayEnd moveObj=new MoveZeros2ArrayEnd();
-		int[] array1={0,1,2,4,0,4,3,0,2,6,7,0,3,0,3};
+		int[] array1={1,0,2,4,0,4,3,0,2,6,7,0,3,0,3};
+        for (int j=0;j<array1.length;j++)
+		{
+			System.out.print(array1[j]+" ");
+		}
 		array1=moveObj.move2End(array1);
+		System.out.println("\n");
 		for (int j=0;j<array1.length;j++)
 		{
-			System.out.print(array1[j]);
+			System.out.print(array1[j]+" ");
 		}
 	}
 }
