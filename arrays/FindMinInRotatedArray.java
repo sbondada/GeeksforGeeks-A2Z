@@ -35,6 +35,11 @@ public class FindMinInRotatedArray
 			System.out.print(array[i]+" ");
 		}
 		System.out.println();
+		//returning directly the min if the array is not rotated at all
+		if(array[0]<array[array.length-1])
+		{
+			System.out.println("the min elements is "+array[0]);
+		}
 		FindMinInRotatedArray fmra=new FindMinInRotatedArray();
 		int minElement=fmra.getMinElement(array,0,array.length-1);
 		System.out.println("min elements is "+minElement);
