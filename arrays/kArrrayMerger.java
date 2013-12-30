@@ -30,7 +30,6 @@ public class kArrrayMerger
 			int min=Integer.MAX_VALUE,pos=-1;
 			for(int i=0;i<kArray.length;i++)
 			{
-				
 				//checking if the array of the array of arrays has any more elements.and empty would
 				//break if all the arrays for array of arrays have no more elements
                 if(posArray[i]>=kArray[i].length)
