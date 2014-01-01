@@ -23,23 +23,36 @@ public class FindAllPermutations
 		}
 		return clonedArray;
 	}
+	public void displayArray(int[] array)
+	{
+		for(int i=0;i<array.length;i++)
+		{
+			System.out.print(array[i]+" ");
+		}
+		System.out.println();
+	}
 	public ArrayList<Integer[]> findPermutations(ArrayList<Integer[]> permutationList,int[] array,int[] permArray,int inc) 
 	{
 		for(int i=0;i<array.length;i++)
 		{
 			if(array[i]!=0)
 			{
+				displayArray(array);
 				permArray[inc]=array[i];
 				array[i]=0;
 				if(inc==0)
 				{
+					displayArray(permArray);
 					permutationList.add(convertIntToInteger(cloneArray(permArray)));
-					return permutationList;
+//					return permutationList;
 				}
 				else
 				{
+					displayArray(permArray);
 					inc-=1;
-					permutationList=findPermutations(permutationList, array, permArray, inc);
+                    findPermutations(permutationList,cloneArray(array), cloneArray(permArray), inc);
+//					permutationList=findPermutations(permutationList,cloneArray(array), cloneArray(permArray), inc);
+					System.out.println(permutationList.size());
 				}
 			}
 		}
@@ -54,6 +67,7 @@ public class FindAllPermutations
 		int[] pemArray=new int[r];
 		ArrayList<Integer[]> permutationList=new ArrayList<Integer[]>();
 		permutationList=fap.findPermutations(permutationList,array, pemArray, r-1);
+		System.out.println(permutationList.get(2).length);
 		System.out.println(permutationList.size());
 	}
 }
