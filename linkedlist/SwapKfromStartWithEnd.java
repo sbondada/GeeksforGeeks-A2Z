@@ -104,24 +104,55 @@ public class SwapKfromStartWithEnd
 		Node temp1=null;
 		Node temp2=null;
 		int inc=1;
-		while(loc1!=null)
+		if(k>1 && k<list.listSize()+1)
 		{
-			if(inc==k-1)
-			{
-				temp1=loc1;
-			}
-			if(inc==k+1)
-			{
-				loc2=list.head;
-			}
-			if(inc>k+1)
-			{
-				loc2=loc2.next;
-			}
-			loc1=loc1.next;
-			inc++;
-		}
+                while(loc1!=null)
+                {
+                        if(inc==k-1)
+                        {
+                                temp1=loc1;
+                        }
+                        if(inc==k+1)
+                        {
+                                loc2=list.head;
+                        }
+                        if(inc>k+1)
+                        {
+                                loc2=loc2.next;
+                        }
+                        loc1=loc1.next;
+                        inc++;
+                }
+                temp2=loc2;
+                if(temp1.next!=temp2 || temp2.next!=temp1)
+                {
+                        Node temp1k=temp1.next;
+                        Node temp2k=temp2.next;
+                        temp1.next=temp2k;
+                        loc2=temp1k.next;
+                        temp1k.next=temp2k.next;
+                        temp2.next=temp1k;
+                        temp2k.next=loc2;
+                }
+                else
+                {
+                	if(temp1.next==temp2)
+                	{
+                		Node temp2k=temp2.next.next;
+                		temp1.next=temp2.next;
+                		temp1.next.next=temp2;
+                		temp2.next=temp2k;
+                	}
+                	else
+                	{
+                        Node temp1k=temp1.next.next;
+                		temp2.next=temp1.next;
+                		temp2.next.next=temp1;
+                		temp1.next=temp1k;
+                	}
 
+                }
+        }
 	}
 	
 	public static void main(String args[])
@@ -137,7 +168,8 @@ public class SwapKfromStartWithEnd
 		list.addNode(10);
 		list.printList();
 		System.out.println("length of list "+list.listSize());
-		sswe.swapvalKfromStartandEnd(list, -1);
+//		sswe.swapvalKfromStartandEnd(list, 3);
+		sswe.swapNodeKfromStartandEnd(list, 4);
 		list.printList();
 	}
 
