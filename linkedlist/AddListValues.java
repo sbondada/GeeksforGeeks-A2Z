@@ -63,6 +63,26 @@ public class AddListValues
 			this.next=null;
 		}
 	}
+	public int addList(LinkedList list1,LinkedList list2)
+	{
+		Node loc1=list1.head;
+		Node loc2=list2.head;
+		int num1=0,num2=0;
+		while(loc1!=null)
+		{
+			num1*=10;
+			num1=num1+loc1.val;
+			loc1=loc1.next;
+		}
+        while(loc2!=null)
+		{
+			num2*=10;
+			num2=num2+loc2.val;
+			loc2=loc2.next;
+		}
+        int sum=num1+num2;
+        return sum;
+	}
 	public static void main(String args[])
 	{
 		AddListValues alv = new AddListValues();
@@ -77,5 +97,7 @@ public class AddListValues
 		list2.addNode(2);
 		list2.addNode(9);
 		list2.printList();
+		int sum=alv.addList(list1, list2);
+		System.out.println("sum "+sum);
 	}
 }
