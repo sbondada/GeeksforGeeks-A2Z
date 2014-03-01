@@ -71,7 +71,7 @@ public class UnionIntersectionOfList
 	public LinkedList Intersection(LinkedList list1,LinkedList list2)
 	{
 		Node loc1=list1.head;
-		Node temp1=null,temp2=null;
+		Node temp1=null;
 		Node loc2=list2.head;
 		Node intersectionHead=null;
 		Node intersectionCurrent=null;
