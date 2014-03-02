@@ -81,7 +81,8 @@ public class Find3NumCombSum
 				Node loc3= list3.head;
 				while(loc3!=null)
 				{
-					if(loc1.val+loc2.val+loc3.val==sum)
+					tempSum=loc1.val+loc2.val+loc3.val;
+					if(tempSum==sum)
 					{
 						array[0]=loc1.val;
 						array[1]=loc2.val;
