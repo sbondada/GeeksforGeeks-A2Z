@@ -1,8 +1,5 @@
 package linkedlist;
 
-import java.util.List;
-
-import org.w3c.dom.ls.LSInput;
 
 public class DeleteNodesWithGreaterRightValue 
 {
