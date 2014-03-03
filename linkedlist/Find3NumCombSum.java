@@ -71,7 +71,6 @@ public class Find3NumCombSum
 	public int[] matchSumFromLists(LinkedList list1,LinkedList list2, LinkedList list3,int sum)
 	{
 		Node loc1=list1.head;
-		int tempSum=0;
 		int[] array= new int[3];
 		while(loc1!=null)
 		{
@@ -81,8 +80,7 @@ public class Find3NumCombSum
 				Node loc3= list3.head;
 				while(loc3!=null)
 				{
-					tempSum=loc1.val+loc2.val+loc3.val;
-					if(tempSum==sum)
+					if(loc1.val+loc2.val+loc3.val==sum)
 					{
 						array[0]=loc1.val;
 						array[1]=loc2.val;
