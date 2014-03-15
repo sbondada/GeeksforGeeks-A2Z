@@ -1,5 +1,7 @@
 package trees;
 
+import java.util.ArrayList;
+
 public class CommonBTOperations 
 {
 	public class BinaryTree
@@ -101,6 +103,52 @@ public class CommonBTOperations
 		}
 		return -1;
 	}
+    public class LCAnode
+    {
+    	public Node loc;
+    	public int flag;
+    }
+    public ArrayList<Integer> getPath(BinaryTree tree, int num)
+    {
+    	Node loc=tree.root;
+    	ArrayList<Integer> path=new ArrayList<>();
+    	while(loc!=null)
+    	{
+    		path.add(loc.val);
+    		if(loc.val==num)
+    		{
+    			return path;
+    		}
+            else if(loc.val<num)
+    		{
+    			loc=loc.right;
+    		}
+    		else
+    		{
+    			loc=loc.left;
+    		}
+    	}
+    	return null;
+    }
+    public int lowestCommonAncestor(BinaryTree tree,int first,int second)
+    {
+    	ArrayList<Integer> firstPath=this.getPath(tree, first);
+    	ArrayList<Integer> secPath=this.getPath(tree, second);
+    	if(firstPath!=null && secPath!=null)
+    	{
+    		int inc=0;
+    		while(firstPath.get(inc)==secPath.get(inc))
+    		{
+    			inc++;
+    		}
+    		return firstPath.get(inc-1);
+    	}
+    	else
+    	{
+    		System.out.println("No common parent found");
+    		return -1;
+    	}
+    }
 	public void findDist(BinaryTree tree, int first,int second)
 	{
 		
@@ -140,6 +188,7 @@ public class CommonBTOperations
     	tree.addNode(7);
     	tree.addNode(11);
     	tree.printTree("DFS");
-    	System.out.println(cbto.getDepth(tree, 7));
+//    	System.out.println(cbto.getDepth(tree, 7));
+    	System.out.println(cbto.lowestCommonAncestor(tree, 1, 5));
     }
 }
