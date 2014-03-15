@@ -206,6 +206,44 @@ public class CommonBTOperations
 		this.BranchedSum(sumList, tree.root, sum);
 		return sumList;
 	}
+	public int getNextRightNode(BinaryTree tree,int num)
+	{
+		ArrayList<Node> queue = new ArrayList<>();
+		queue.add(tree.root);
+		int startPoint=0;
+		int endpoint=0;
+		while(!queue.isEmpty())
+		{
+			Node pop=queue.get(0);
+			endpoint--;
+			queue.remove(0);
+			if(pop.val==num)
+			{
+				if(endpoint>=0)
+				{
+					pop=queue.get(0);
+					return pop.val;
+				}
+				else
+				{
+					return -1;
+				}
+			}
+			if(pop.left!=null)
+			{
+			queue.add(pop.left);
+			}
+			if(pop.right!=null)
+			{
+			queue.add(pop.right);
+			}
+			if(endpoint<0)
+			{
+				endpoint=queue.size()-1;
+			}
+		}
+        return -1;
+	}
     public class Node
 	{
 		public int val;
@@ -249,10 +287,11 @@ public class CommonBTOperations
 //    	{
 //    		System.out.print(temp.val+" ");
 //    	}
-    	ArrayList<Integer> sumList=cbto.calculateBranchSum(tree);
-    	for(int temp:sumList)
-    	{
-    		System.out.print(temp+" ");
-    	}
+//    	ArrayList<Integer> sumList=cbto.calculateBranchSum(tree);
+//    	for(int temp:sumList)
+//    	{
+//    		System.out.print(temp+" ");
+//    	}
+    	System.out.println(cbto.getNextRightNode(tree, 10));
     }
 }
