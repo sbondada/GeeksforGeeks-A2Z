@@ -158,6 +158,28 @@ public class CommonBTOperations
 		int mindist=fdepth+sdepth-(2*lcadepth);
 		return mindist;
 	}
+	public void addLeafsToLists(ArrayList<Node> nodeList,Node loc)
+	{
+		if(loc.left==null && loc.right==null)
+		{
+			nodeList.add(loc);
+			return;
+		}
+		if(loc.left!=null)
+		{
+			addLeafsToLists(nodeList, loc.left);
+		}
+		if(loc.right!=null)
+		{
+			addLeafsToLists(nodeList, loc.right);
+		}
+	}
+	public ArrayList<Node> getLeafNodes(BinaryTree tree) 
+	{
+		ArrayList<Node> nodeList=new ArrayList<>();
+		this.addLeafsToLists(nodeList, tree.root);
+		return nodeList;
+	}
     public class Node
 	{
 		public int val;
@@ -195,6 +217,11 @@ public class CommonBTOperations
     	tree.printTree("DFS");
 //    	System.out.println(cbto.getDepth(tree, 7));
 //    	System.out.println(cbto.lowestCommonAncestor(tree, 1, 5));
-    	System.out.println(cbto.findDist(tree,1,11));
+//    	System.out.println(cbto.findDist(tree,1,11));
+    	ArrayList<Node> nodeList=cbto.getLeafNodes(tree);
+    	for(CommonBTOperations.Node temp:nodeList)
+    	{
+    		System.out.print(temp.val+" ");
+    	}
     }
 }
