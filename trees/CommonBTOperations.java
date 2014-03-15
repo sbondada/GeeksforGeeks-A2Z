@@ -149,9 +149,14 @@ public class CommonBTOperations
     		return -1;
     	}
     }
-	public void findDist(BinaryTree tree, int first,int second)
+	public int findDist(BinaryTree tree, int first,int second)
 	{
-		
+		int fdepth=this.getDepth(tree, first);
+		int sdepth=this.getDepth(tree, second);
+		int lca=this.lowestCommonAncestor(tree, first, second);
+		int lcadepth=this.getDepth(tree, lca);
+		int mindist=fdepth+sdepth-(2*lcadepth);
+		return mindist;
 	}
     public class Node
 	{
@@ -189,6 +194,7 @@ public class CommonBTOperations
     	tree.addNode(11);
     	tree.printTree("DFS");
 //    	System.out.println(cbto.getDepth(tree, 7));
-    	System.out.println(cbto.lowestCommonAncestor(tree, 1, 5));
+//    	System.out.println(cbto.lowestCommonAncestor(tree, 1, 5));
+    	System.out.println(cbto.findDist(tree,1,11));
     }
 }
