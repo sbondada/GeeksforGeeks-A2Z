@@ -2,6 +2,8 @@ package trees;
 
 import java.util.ArrayList;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 public class CommonBTOperations 
 {
 	public class BinaryTree
@@ -180,6 +182,30 @@ public class CommonBTOperations
 		this.addLeafsToLists(nodeList, tree.root);
 		return nodeList;
 	}
+	public void BranchedSum(ArrayList<Integer> sumList,Node loc,int sum)
+	{
+		sum=sum+loc.val;
+		if(loc.left==null && loc.right==null)
+		{
+			sumList.add(sum);
+			return;
+		}
+		if(loc.left!=null)
+		{
+			BranchedSum(sumList, loc.left, sum);
+		}
+		if(loc.right!=null)
+		{
+			BranchedSum(sumList, loc.right, sum);
+		}
+	}
+	public ArrayList<Integer> calculateBranchSum(BinaryTree tree)
+	{
+		ArrayList<Integer> sumList=new ArrayList<>();
+		int sum=0;
+		this.BranchedSum(sumList, tree.root, sum);
+		return sumList;
+	}
     public class Node
 	{
 		public int val;
@@ -218,10 +244,15 @@ public class CommonBTOperations
 //    	System.out.println(cbto.getDepth(tree, 7));
 //    	System.out.println(cbto.lowestCommonAncestor(tree, 1, 5));
 //    	System.out.println(cbto.findDist(tree,1,11));
-    	ArrayList<Node> nodeList=cbto.getLeafNodes(tree);
-    	for(CommonBTOperations.Node temp:nodeList)
+//    	ArrayList<Node> nodeList=cbto.getLeafNodes(tree);
+//    	for(CommonBTOperations.Node temp:nodeList)
+//    	{
+//    		System.out.print(temp.val+" ");
+//    	}
+    	ArrayList<Integer> sumList=cbto.calculateBranchSum(tree);
+    	for(int temp:sumList)
     	{
-    		System.out.print(temp.val+" ");
+    		System.out.print(temp+" ");
     	}
     }
 }
