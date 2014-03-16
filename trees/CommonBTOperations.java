@@ -3,6 +3,7 @@ package trees;
 import java.util.ArrayList;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 public class CommonBTOperations 
 {
@@ -244,6 +245,31 @@ public class CommonBTOperations
 		}
         return -1;
 	}
+	public static Node maxNode=null;
+	public static int maxDepth=-1;
+	public void recurDeep(Node loc,int depth,int left)
+	{
+		depth++;
+		if(loc==null)
+		{
+			return;
+		}
+		else
+		{
+			if(depth>maxDepth && left==1)
+			{
+				maxNode=loc;
+				maxDepth=depth;
+			}
+			recurDeep(loc.left, depth, 1);
+			recurDeep(loc.right, depth, 0);
+		}
+	}
+	public int deepestLeftNode(BinaryTree tree)
+	{
+		recurDeep(tree.root,0,0);
+		return maxNode.val;
+	}
     public class Node
 	{
 		public int val;
@@ -292,6 +318,7 @@ public class CommonBTOperations
 //    	{
 //    		System.out.print(temp+" ");
 //    	}
-    	System.out.println(cbto.getNextRightNode(tree, 10));
+//    	System.out.println(cbto.getNextRightNode(tree, 10));
+    	System.out.println(cbto.deepestLeftNode(tree));
     }
 }
