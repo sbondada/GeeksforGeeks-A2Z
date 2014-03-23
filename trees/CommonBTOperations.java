@@ -7,6 +7,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 public class CommonBTOperations 
 {
+	static int leafheight=-1;
 	public class BinaryTree
 	{
 		public Node root;
@@ -133,6 +134,38 @@ public class CommonBTOperations
     	}
     	return null;
     }
+    public int calculateTheSum(Node curr,int sum)
+    {
+    	if(curr!=null) 
+    	{
+    		sum=calculateTheSum(curr.left, sum);
+    		sum=sum+curr.val;
+    		sum=calculateTheSum(curr.right, sum);
+    		return sum;
+    	}
+    	else
+    	{
+    		return sum;
+    	}
+    }
+    public int replaceWithGreatestNode(Node curr,int sum,int totalsum)
+    {
+    	if(curr!=null)
+    	{
+    	    sum=replaceWithGreatestNode(curr.left, sum,totalsum);
+    		sum=sum+curr.val;
+    		if(curr.val<totalsum-sum)
+    		{
+    		curr.val=totalsum-sum;
+    		}
+    		sum=replaceWithGreatestNode(curr.right, sum,totalsum);
+    		return sum;	
+    	}
+    	else
+    	{
+    		return sum;
+    	}
+    }
     public int lowestCommonAncestor(BinaryTree tree,int first,int second)
     {
     	ArrayList<Integer> firstPath=this.getPath(tree, first);
@@ -245,6 +278,27 @@ public class CommonBTOperations
 		}
         return -1;
 	}
+	public int getDepthoddleaf(Node curr,int depth,int maxodddepth)
+	{
+		depth++;
+		if(curr!=null)
+		{
+			if(curr.left==null&&curr.right==null&&depth%2!=0)
+			{
+				if(maxodddepth<depth)
+				{
+					maxodddepth=depth;
+				}
+			}
+			int templeftdepth=getDepthoddleaf(curr.left, depth, maxodddepth);
+			int temprightdepth=getDepthoddleaf(curr.right, depth, maxodddepth);
+			return Math.max(templeftdepth,temprightdepth);
+		}
+		else
+		{
+			return maxodddepth;
+		}
+	}
 	public static Node maxNode=null;
 	public static int maxDepth=-1;
 	public void recurDeep(Node loc,int depth,int left)
@@ -264,6 +318,28 @@ public class CommonBTOperations
 			recurDeep(loc.left, depth, 1);
 			recurDeep(loc.right, depth, 0);
 		}
+	}
+	public boolean isLeavesWithConstHeight(Node curr,int depth)
+	{
+		depth++;
+		if(curr!=null)
+		{
+			if(curr.left==null && curr.right==null)
+			{
+				if(leafheight!=-1 && depth!=leafheight)
+				{
+					return false;
+				}
+				else
+				{
+					leafheight=depth;
+				}
+			}
+				boolean lefttempcond=isLeavesWithConstHeight(curr.left, depth);
+				boolean righttempcond=isLeavesWithConstHeight(curr.right, depth);
+				return (lefttempcond&&righttempcond);
+		}
+		return true;
 	}
 	public int deepestLeftNode(BinaryTree tree)
 	{
@@ -297,14 +373,15 @@ public class CommonBTOperations
     	tree.addNode(3);
     	tree.addNode(9);
     	tree.addNode(2);
-    	tree.addNode(4);
-    	tree.addNode(8);
-    	tree.addNode(10);
-    	tree.addNode(1);
-    	tree.addNode(5);
-    	tree.addNode(7);
-    	tree.addNode(11);
-    	tree.printTree("DFS");
+//    	tree.addNode(4);
+//    	tree.addNode(8);
+//    	tree.addNode(10);
+//    	tree.addNode(1);
+//    	tree.addNode(5);
+//    	tree.addNode(7);
+//    	tree.addNode(11);
+//    	tree.addNode(23);
+//    	tree.printTree("DFS");
 //    	System.out.println(cbto.getDepth(tree, 7));
 //    	System.out.println(cbto.lowestCommonAncestor(tree, 1, 5));
 //    	System.out.println(cbto.findDist(tree,1,11));
@@ -319,6 +396,12 @@ public class CommonBTOperations
 //    		System.out.print(temp+" ");
 //    	}
 //    	System.out.println(cbto.getNextRightNode(tree, 10));
-    	System.out.println(cbto.deepestLeftNode(tree));
+//    	System.out.println(cbto.deepestLeftNode(tree));
+//    	System.out.println(cbto.isLeavesWithConstHeight(tree.root,0));
+//    	System.out.println(cbto.getDepthoddleaf(tree.root,0,0))
+//    	System.out.println(cbto.calculateTheSum(tree.root, 0));
+    	cbto.replaceWithGreatestNode(tree.root,0,cbto.calculateTheSum(tree.root, 0));
+    	System.out.println(cbto.calculateTheSum(tree.root,0));
+    	tree.printTree("DFS");
     }
 }
