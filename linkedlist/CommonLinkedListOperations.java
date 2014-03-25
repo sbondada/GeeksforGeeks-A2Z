@@ -38,6 +38,30 @@ public class CommonLinkedListOperations
 			this.next=null;
 		}
 	}
+	//recursive method for reversals still not yet completed
+	public void ReccurReverse(Node curr)
+	{
+		if(curr!=null)
+		{
+			if(curr.next!=null)
+			{
+				curr=curr.next.next;
+				ReccurReverse(curr);
+			}
+			else
+			{
+				return;
+			}
+			int transval=temp.val;
+			temp.val=curr.val;
+			curr.val=transval;
+			temp=temp.next.next;
+		}
+		else
+		{
+			return;
+		}
+	}
 	// code to reverse the alternate node in a linked list
 	public void ReverseAlternatesInList(LinkedList list)
 	{
