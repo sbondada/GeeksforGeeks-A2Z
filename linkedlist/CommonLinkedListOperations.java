@@ -38,7 +38,32 @@ public class CommonLinkedListOperations
 			this.next=null;
 		}
 	}
-
+	//swapping the alternate elements
+		public void swapElementsInLists(LinkedList list)
+		{
+			Node t1=null;
+			Node t2=list.Head;
+			Node t3=t2.next;
+			t2.next=t3.next;
+			t3.next=t2;
+			list.Head=t3;
+			while(true)
+			{
+				t1=t2;
+				t2=t2.next;
+				t3=t2.next;
+				if(t3!=null)
+				{
+				t2.next=t3.next;
+				t3.next=t2;
+				t1.next=t3;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
 	// reversing a linked list using reccursions imp reursion method
 	public boolean isListPalindrome(Node curr)
 	{
