@@ -38,6 +38,45 @@ public class CommonLinkedListOperations
 			this.next=null;
 		}
 	}
+	//function to find the intesection point
+	public Node findPointOfIntersection(LinkedList list)
+	{
+		Node temp1=list.Head, temp2=temp1.next;
+		while(temp1!=temp2)
+		{
+			temp1=temp1.next;
+			temp2=temp2.next.next;
+		}
+		int looplen=1;
+		temp2=temp2.next;
+		while(temp1!=temp2)
+		{
+			temp2=temp2.next;
+			looplen++;
+		}
+		temp2=list.Head;
+		while(looplen!=0)
+		{
+			temp2=temp2.next;
+			looplen--;
+		}
+		temp1=list.Head;
+		while(temp1!=temp2)
+		{
+			temp1=temp1.next;
+			temp2=temp2.next;
+		}
+		return temp1;
+
+	}
+	public void reverseGroupOfN(LinkedList list, int k)
+	{
+		Node start=null,End=null;
+		Node temp1=list.Head;
+		Node temp2=temp1.next;
+		Node temp3= temp2.next;
+//		while()
+	}
 	//swapping the alternate elements
 		public void swapElementsInLists(LinkedList list)
 		{
@@ -102,6 +141,9 @@ public class CommonLinkedListOperations
 		list.addNode(9);
 		list.addNode(8);
 		list.addNode(3);
+		Node temp=cllo.new Node(29);
+		list.Current.next=temp;
+		list.Current=list.Current.next;
 		list.addNode(1);
 		list.addNode(13);
 		list.addNode(18);
@@ -109,11 +151,14 @@ public class CommonLinkedListOperations
 		list.addNode(17);
 		list.addNode(14);
 		list.addNode(15);
-		list.printList();
+		list.Current.next=temp;
+//		list.printList();
 //		CommonLinkedListOperations.temp=list.Head;
 //		boolean checkCondition=cllo.isListPalindrome(list.Head);
 //		System.out.println(checkCondition);
-		cllo.swapElementsInLists(list);
-		list.printList();
+//		cllo.swapElementsInLists(list);
+//		list.printList();
+		Node intNode=cllo.findPointOfIntersection(list);
+		System.out.println(intNode.val);
 	}
 }
