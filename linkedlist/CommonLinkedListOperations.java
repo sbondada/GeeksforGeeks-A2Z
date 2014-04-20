@@ -131,11 +131,6 @@ public class CommonLinkedListOperations
 	
 	public void reverseGroupOfN(LinkedList list, int k)
 	{
-		Node start=null,End=null;
-		Node temp1=list.Head;
-		Node temp2=temp1.next;
-		Node temp3= temp2.next;
-//		while()
 	}
 	//swapping the alternate elements
 		public void swapElementsInLists(LinkedList list)
