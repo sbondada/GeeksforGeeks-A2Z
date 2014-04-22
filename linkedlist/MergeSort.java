@@ -1,6 +1,5 @@
 package linkedlist;
 
-
 public class MergeSort 
 {
     public class LinkedList
